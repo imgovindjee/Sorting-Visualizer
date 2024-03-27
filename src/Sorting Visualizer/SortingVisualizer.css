@@ -1,0 +1,74 @@
+/* whole body Sction */
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: black; */
+}
+
+
+/* top Section */
+.user-input{
+    margin-top: 20px;
+}
+
+input{
+    margin: 21px 12px;
+    border-radius: 18px;
+    box-shadow: rgba(98, 105, 100, 0.35) 0px 5px 15px;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    padding: 0px 1.2rem;
+    height: 40px;
+    width: 20vw;
+}
+
+.submit{
+    box-shadow: rgba(98, 105, 100, 0.35) 0px 5px 15px;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    height: 40px;
+}
+
+
+
+/* Bar(ARRRAY) section sorting */
+.array-container{
+    /* position: absolute;
+    left: 135px;
+    margin-top: 20px; */
+    /* left: 130px; */
+    margin: 20px 20px 0 20px;
+}
+
+.array-bar{
+    /* width: 4px; */
+    background-color: thistle;
+    /* background-color: white; */
+    display: inline-block;
+    margin: 0 1px;
+}
+
+
+
+/* Button section */
+button{
+    height: 42px;
+    margin: 19px 7px;
+    border-radius: 30px;
+    padding: 0 2rem;
+    outline: none;
+    border: none;
+    box-shadow: rgba(0, 0, 0, .35) 0px 5px 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+button:hover{
+    cursor: pointer;
+    color: rgb(108, 107, 175);
+    transition: all .3s ease-in-out;
+}
