@@ -5,7 +5,9 @@ import insertionsort from '../Sorting Algorithm/InsertionSort';
 import quicksort from '../Sorting Algorithm/QuickSort';
 import bubblesort from '../Sorting Algorithm/BubbleSort';
 import selectionsort from '../Sorting Algorithm/SelectionSort';
-import heapsort from '../Sorting Algorithm/HeapSort';
+import { heapsort } from '../Sorting Algorithm/HeapSort';
+import { radixsort } from '../Sorting Algorithm/RadixSort';
+import { countsort } from '../Sorting Algorithm/CountSort';
 
 
 // User Screen Height and Width
@@ -213,33 +215,90 @@ export class SortingVisualize extends React.Component {
   }
 
 
-  
+
   heapSort() {
     const animations = heapsort(this.state.array);
-    for(let i=0; i<animations.length; i++){
+    for (let i = 0; i < animations.length; i++) {
       const isColorChanged = animations[i][0] === "comparsion1" || animations[i][0] === "comparsion2";
       const arrayBars = document.getElementsByClassName('array-bar');
-      if(isColorChanged) {
-        const color = animations[i][0] === "comparsion1" ? SECONDARY_COLOR:PRIMARY_COLOR;
-        const[, barOneIdx, barTwoIdx] = animations[i];
+      if (isColorChanged) {
+        const color = animations[i][0] === "comparsion1" ? SECONDARY_COLOR : PRIMARY_COLOR;
+        const [, barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
-        setTimeout(()=>{
+        setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
         }, i * ANIMATION_SPEED_MS);
       } else {
-        const[, barOneIdx, newHeight] = animations[i];
-        if(barOneIdx === -1){
+        const [, barOneIdx, newHeight] = animations[i];
+        if (barOneIdx === -1) {
           continue;
         }
         const barOneStyle = arrayBars[barOneIdx].style;
-        setTimeout(()=>{
+        setTimeout(() => {
           barOneStyle.height = `${newHeight}px`;
-        }, i*ANIMATION_SPEED_MS);
+        }, i * ANIMATION_SPEED_MS);
       }
     }
   }
+
+
+
+  radixSort() {
+    const animations = radixsort(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const isColorChanged = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+      const arrayBars = document.getElementsByClassName('array-bar');
+      if (isColorChanged) {
+        const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+        const [, barOneIndex] = animations[i];
+        const barOneStyle = arrayBars[barOneIndex].style;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else {
+        const [, barOneIdx, newHeight] = animations[i];
+        if (barOneIdx === -1) {
+          continue;
+        }
+        const barOneStyle = arrayBars[barOneIdx].style;
+        setTimeout(() => {
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
+  }
+
+
+
+  CountSort() {
+    const animations = countsort(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const isColorChanged = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+      const arrayBars = document.getElementsByClassName('array-bar');
+      if (isColorChanged) {
+        const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+        const [, barOneIndex] = animations[i];
+        const barOneStyle = arrayBars[barOneIndex].style;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else {
+        const [, barOneIdx, newHeight] = animations[i];
+        if (barOneIdx === -1) {
+          continue;
+        }
+        const barOneStyle = arrayBars[barOneIdx].style;
+        setTimeout(() => {
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
+  }
+
+
+
 
 
   // TESTING ALL THE SORTING ALGORITHM
@@ -307,6 +366,8 @@ export class SortingVisualize extends React.Component {
           <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
           <button onClick={() => this.insertionSort()}>Insertion Sort</button>
           <button onClick={() => this.selectionSort()}>Selection Sort</button>
+          <button onClick={() => this.radixSort()}>Radix Sort</button>
+          <button onClick={() => this.CountSort()}>Count Sort</button>
           <button onClick={() => this.testSortingAlgorithms()}>Test Algorithms</button>
         </div>
 

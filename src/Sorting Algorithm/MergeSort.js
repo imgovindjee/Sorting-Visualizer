@@ -73,6 +73,11 @@ function mergeSortHelper(array, start, end, auxillary_Array, animations) {
 
 
 function mergesort(array) {
+    // Algorithm Testing
+    // const jsSortedArray = array.slice().sort((a, b) => a - b);
+    // console.log("Sort Works correctly:-", arrayAreEqual(array, jsSortedArray));
+
+
     // Base Case
     if (array.length <= 1) {
         return array;
@@ -81,11 +86,27 @@ function mergesort(array) {
     const animations = [];
     const auxillary_Array = array.slice();
     mergeSortHelper(array, 0, array.length - 1, auxillary_Array, animations);
+
+    // Some Final Test-Run
+    const jsSortedArray = array.slice().sort((a, b) => a - b);
+    console.log("Sort Works correctly:-", arrayAreEqual(array, jsSortedArray));
+
     return animations;
 }
 
 
+function arrayAreEqual(rsArray, jsArray) {
+    if (rsArray.length !== jsArray.length) {
+        return false;
+    }
 
+    for (let i = 0; i < rsArray.length; i++) {
+        if (rsArray[i] !== jsArray[i]) {
+            return false;
+        }
+    }
+    return true;
+}
 
 
 

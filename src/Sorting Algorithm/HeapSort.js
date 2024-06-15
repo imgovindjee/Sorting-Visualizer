@@ -1,14 +1,21 @@
-function heapsort(array) {
+export function heapsort(array) {
     let animations = [];
     let helperArray = array.slice();
     helperHeapSort(helperArray, animations);
-    return animations; 
+
+    // Some Final Test-Run
+    const jsSortedArray = array.slice().sort((a, b) => a - b);
+    console.log("Sort Works correctly:-", arrayAreEqual(helperArray, jsSortedArray));
+    // console.log(helperArray);
+    // console.log(jsSortedArray);
+    return animations;
 }
 
-const helperHeapSort = (helperArray, animations) => {
-    var len = helperArray.length; // heapSize
 
-    for (let i = Math.floor(len / 2) - 1; i >= 0; i--) {
+const helperHeapSort = (helperArray, animations) => {
+    const len = helperArray.length; // heapSize
+
+    for (let i = (len - 2) / 2; i >= 0; i--) {
         heapify(helperArray, len, i, animations);
     }
 
@@ -20,15 +27,13 @@ const helperHeapSort = (helperArray, animations) => {
 
         heapify(helperArray, i, 0, animations);
     }
-    animations.push(["comparsion1", 0, len-1]);
-    animations.push(["comparsion2", 0, len-1]);
 }
 
-
+// Max-heap Build
 const heapify = (helperArray, len, idx, animations) => {
     let largest = idx;
-    let left = Math.floor(2 * idx) + 1;
-    let right = Math.floor(2 * idx) + 2;
+    let left = (2 * idx) + 1;
+    let right = (2 * idx) + 2;
 
     if (left < len && helperArray[left] > helperArray[largest]) {
         animations.push(["comparsion1", largest, left]);
@@ -43,15 +48,12 @@ const heapify = (helperArray, len, idx, animations) => {
     }
 
     if (largest !== idx) {
-        animations.push(["swap", largest, helperArray[idx]]);
         animations.push(["swap", idx, helperArray[largest]]);
+        animations.push(["swap", largest, helperArray[idx]]);
 
         swap(helperArray, idx, largest);
 
-        animations.push(["comparsion1", idx, largest]);
-        animations.push(["comparsion2", idx, largest]);
-
-        heapify(heapify, len, largest, animations);
+        heapify(helperArray, len, largest, animations);
     }
 }
 
@@ -62,77 +64,16 @@ const swap = (helperArray, i, j) => {
 }
 
 
-export default heapsort
 
+function arrayAreEqual(rsArray, jsArray) {
+    if (rsArray.length !== jsArray.length) {
+        return false;
+    }
 
-
-// const heapsort = (array) => {
-//     let animations = [];
-//     const leftIdx = (i) => 2 * i + 1;
-//     const rightIdx = (i) => 2 * i + 2;
-
-//     const heapify = (array, i, heapSize) => {
-//         const left = leftIdx(i);
-//         const right = rightIdx(i);
-
-//         // animations.push(["comparsion1", i, left]);
-
-//         let largest = left < heapSize && array[left] > array[i] ? left : i;
-
-//         // animations.push(["comparsion1", largest, right]);
-
-//         if (right < heapSize && array[right] > array[largest]) {
-//             largest = right;
-//         }
-//         if (largest !== i) {
-//             animations.push(["swap", i, array[largest]]);
-//             animations.push(["swap", largest, array[i]]);
-
-//             swap(array, i, largest);
-
-//             animations.push(["comparsion1", largest, heapSize]);
-//             heapify(array, largest, heapSize);
-//         }
-//     };
-
-//     const buildMaxHeap = (array) => {
-//         const len = array.length;
-//         for (let i = Math.floor(len / 2); i >= 0; i--) {
-//             heapify(array, i, len);
-//         }
-
-//         animations.push(["comparsion1", 0, len]);
-//     };
-
-//     const swap = (helperArray, i, j) => {
-//         let temp = helperArray[i];
-//         helperArray[i] = helperArray[j];
-//         helperArray[j] = temp;
-//     };
-
-//     const helperHeapSort = (array) => {
-//         buildMaxHeap(array);
-
-//         let heapSize = array.length;
-//         for (let i = array.length - 1; i > 0; i--) {
-//             animations.push(["swap", 0, array[i]]);
-//             animations.push("swap", i, array[0]);
-
-//             swap(array, 0, i);
-//             heapSize--;
-
-//             animations.push(["comparsion1", 0, heapSize]);
-
-//             heapify(array, 0, heapSize);
-
-//             // animations.push(["comparsion1", 0, heapSize]);
-//         }
-
-//         // animations.push(["comparsion1", 0, heapSize]);
-//     };
-
-//     helperHeapSort(array);
-//     return animations;
-// }
-
-// export default heapsort
+    for (let i = 0; i < rsArray.length; i++) {
+        if (rsArray[i] !== jsArray[i]) {
+            return false;
+        }
+    }
+    return true;
+}

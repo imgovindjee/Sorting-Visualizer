@@ -2,7 +2,11 @@ const quicksort = (array)=>{
     let animations = [];
     let cpy_array = array.slice();
     quickSortHelper(cpy_array, 0, cpy_array.length-1, animations);
-    array = cpy_array;
+    // array = cpy_array;
+
+    // Some Final Test-Run
+    const jsSortedArray = array.slice().sort((a, b) => a - b);
+    console.log("Sort Works correctly:-", arrayAreEqual(cpy_array, jsSortedArray));
     return animations;
 }
 
@@ -60,5 +64,19 @@ const swap = (cpy_array, i, j) =>{
     cpy_array[j] = temp;
 }
 
+
+
+function arrayAreEqual(rsArray, jsArray) {
+    if (rsArray.length !== jsArray.length) {
+        return false;
+    }
+
+    for (let i = 0; i < rsArray.length; i++) {
+        if (rsArray[i] !== jsArray[i]) {
+            return false;
+        }
+    }
+    return true;
+}
 
 export default quicksort
